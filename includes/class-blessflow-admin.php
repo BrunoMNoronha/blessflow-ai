@@ -49,14 +49,18 @@ class BlessFlow_Admin {
 	}
 
 	public function display_plugin_admin_page() {
-		$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'dashboard';
+		$active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'dashboard';
+
+		// Compatibilidade com links antigos do runner clássico.
+		if ( 'runner' === $active_tab ) {
+			$active_tab = 'runner_v2';
+		}
 		?>
 		<div class="wrap">
 			<h1>🤖 BlessFlow AI</h1>
 			
 			<h2 class="nav-tab-wrapper">
 				<a href="?page=blessflow-ai&tab=dashboard" class="nav-tab <?php echo $active_tab == 'dashboard' ? 'nav-tab-active' : ''; ?>">Dashboard</a>
-				<a href="?page=blessflow-ai&tab=runner" class="nav-tab <?php echo $active_tab == 'runner' ? 'nav-tab-active' : ''; ?>">Runner (Clássico)</a>
 				<a href="?page=blessflow-ai&tab=runner_v2" class="nav-tab <?php echo $active_tab == 'runner_v2' ? 'nav-tab-active' : ''; ?>">✨ Novo Post V2</a>
 				<a href="?page=blessflow-ai&tab=history" class="nav-tab <?php echo $active_tab == 'history' ? 'nav-tab-active' : ''; ?>">Histórico</a>
 				<a href="?page=blessflow-ai&tab=settings" class="nav-tab <?php echo $active_tab == 'settings' ? 'nav-tab-active' : ''; ?>">Configurações</a>
@@ -68,9 +72,6 @@ class BlessFlow_Admin {
 				switch ( $active_tab ) {
 					case 'dashboard':
 						require_once BLESSFLOW_PLUGIN_DIR . 'templates/dashboard.php';
-						break;
-					case 'runner':
-						require_once BLESSFLOW_PLUGIN_DIR . 'templates/runner.php';
 						break;
 					case 'runner_v2':
 						require_once BLESSFLOW_PLUGIN_DIR . 'templates/runner-v2.php';
