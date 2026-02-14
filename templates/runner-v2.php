@@ -9,13 +9,26 @@
             
             <label for="blessflow_v2_model" class="label-heading">Modelo</label>
             <select id="blessflow_v2_model" class="widefat">
-                <option value="gemini-1.5-flash">Gemini 1.5 Flash (Rápido)</option>
-                <option value="gemini-1.5-pro">Gemini 1.5 Pro (Mais Inteligente)</option>
                 <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
             </select>
+            
+            <label for="blessflow_v2_category" class="label-heading" style="margin-top: 15px;">Categoria</label>
+            <select id="blessflow_v2_category" class="widefat">
+                <?php
+                $categories = get_categories( array( 'hide_empty' => 0 ) );
+                foreach ( $categories as $category ) {
+                    echo '<option value="' . esc_attr( $category->term_id ) . '">' . esc_html( $category->name ) . '</option>';
+                }
+                ?>
+            </select>
+
 
             <label for="blessflow_v2_topic" class="label-heading" style="margin-top: 15px;">Tópico</label>
             <textarea id="blessflow_v2_topic" class="widefat" rows="5" placeholder="Ex: Guia completo sobre Python para iniciantes"></textarea>
+c:\Users\Notebook.gemini\antigravity\playground\quantum-protostar\session_state.md
+.
+
+Session State
 
             <button type="button" id="btn_step_title" class="button button-primary button-large" style="width: 100%; margin-top: 20px;">
                 Gerar Título &rarr;

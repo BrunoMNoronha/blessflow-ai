@@ -307,7 +307,7 @@ jQuery(document).ready(function ($) {
             title: title,
             content: content,
             meta_desc: $('#blessflow_v2_excerpt').val(),
-            category: 1, // ToDo: Adicionar input de categoria na UI V2
+            category: $('#blessflow_v2_category').val(),
         }, function (res) {
             if (res.success) {
                 logV2('Post salvo com sucesso! ID: ' + res.data.post_id, 'success');
